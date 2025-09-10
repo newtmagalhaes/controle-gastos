@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     # Libs
     # Apps
     'apps.manager',
+    'apps.core',
 ]
 
 MIDDLEWARE = [
