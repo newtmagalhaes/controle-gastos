@@ -1,0 +1,25 @@
+{% extends "core/base_pagination.html" %}
+
+{% block page %}
+<table class="table table-striped text-center">
+    <thead class="table-info">
+        <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for categoria in object_list %}
+        <tr>
+            <td>{{ categoria.titulo }}</td>
+            <td class="text-end">{{ categoria.total|floatformat:"-2" }}</td>
+        </tr>
+
+        {% empty %}
+        <tr><td rowspan="2">Lista vazia</td></tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock page %}

@@ -1,0 +1,27 @@
+{% extends "core/base_pagination.html" %}
+
+{% block page %}
+<table class="table table-striped text-center">
+    <thead class="table-info">
+        <tr>
+            <th scope="col">título</th>
+            <th scope="col">data</th>
+            <th scope="col">valor</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in object_list %}
+        <tr>
+            <td>{{ item.categoria.titulo }}</td>
+            <td>{{ item.date|date:"d/M/Y" }}</td>
+            <td class="text-end">{{ item.value }}</td>
+        </tr>
+
+        {% empty %}
+        <tr><td class="text-center" colspan="3">Lista vazia</td></tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock page %}

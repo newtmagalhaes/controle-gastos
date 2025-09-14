@@ -16,8 +16,11 @@ class CategoriaDespesa(models.Model):
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
         related_name='despesas', null=False, blank=False,
     )
-    # itens_despesa: RelatedManager[ItemDespesa]
+    # itens_despesas: RelatedManager[ItemDespesa]
 
     class Meta:
         verbose_name = 'categoria de despesa'
         verbose_name_plural = 'categorias de despesas'
+
+    def __str__(self) -> str:
+        return f'Categoria[{self.pk}]({self.titulo})'
