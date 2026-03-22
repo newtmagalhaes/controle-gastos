@@ -1,0 +1,22 @@
+<div class="input-group flex-nowrap mb-3">
+    <span class="input-group-text">{{ widget.attrs.min }}</span>
+    <div class="container">
+        <div class="col">
+            <input type="range" name="{{ widget.name }}"
+            {% if widget.value != None %} value="{{ widget.value }}"{% endif %}
+            {% include "django/forms/widgets/attrs.html" %}>
+            <div class="text-center">
+                <span id="{{ widget.attrs.id }}_range"> {{ attrs.value }} </span>
+            </div>
+        </div>
+    </div>
+    <span class="input-group-text">{{ widget.attrs.max }}</span>
+</div>
+
+<script>
+document.getElementById('{{ widget.attrs.id }}_range').textContent = document.getElementById('{{ widget.attrs.id }}').value;
+
+document.getElementById('{{ widget.attrs.id }}').addEventListener('input', function() {
+    document.getElementById('{{ widget.attrs.id }}_range').textContent = this.value;
+});
+</script>

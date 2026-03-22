@@ -1,0 +1,12 @@
+asgiref==3.9.1
+coverage==7.10.7
+Django==5.2.6
+django-bootstrap5==26.2
+iniconfig==2.1.0
+packaging==25.0
+pluggy==1.6.0
+Pygments==2.19.2
+pytest==8.4.2
+pytest-cov==7.0.0
+pytest-django==4.11.1
+sqlparse==0.5.3

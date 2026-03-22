@@ -1,0 +1,62 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+{% block page %}
+<table class="table table-striped text-center">
+    {% block page_head %}
+    <thead class="table-info">
+        {% block page_head_title %}
+        <tr><th scope="col">Título da coluna</th></tr>
+        {% endblock page_head_title %}
+    </thead>
+    {% endblock page_head %}
+
+    {% block page_body %}
+    <tbody>
+        {% block page_body_columns %}
+        <tr><td rowspan="2">Lista vazia</td></tr>
+        {% endblock page_body_columns %}
+    </tbody>
+    {% endblock page_body %}
+</table>
+{% endblock page %}
+
+{% block page_control %}
+<nav>
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            {% if page_obj.has_previous %}
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% else %}
+            <a class="page-link disabled" href="#">Anterior</a>
+            {% endif %}
+        </li>
+
+        {% for page_number in paginator.get_elided_page_range %}
+        <li class="page-item">
+            {% if page_obj.number == page_number %}
+            <a class="page-link disabled" aria-current="page" href="?page={{ page_number }}">{{ page_number }}</a>
+            {% elif page_number == paginator.ELLIPSIS %}
+            <a class="page-link disabled" href="#">...</a>
+            {% else %}
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            {% endif %}
+        </li>
+
+        {% empty %}
+        <li class="page-item"><a class="page-link disabled" href="#">...</a></li>
+        {% endfor %}
+
+        <li class="page-item">
+            {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
+            {% else %}
+            <a class="page-link disabled" href="#">Próximo</a>
+            {% endif %}
+        </li>
+    </ul>
+</nav>
+{% endblock page_control %}
+
+{% endblock content %}
