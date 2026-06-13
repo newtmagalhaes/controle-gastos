@@ -1,0 +1,27 @@
+{% extends "django_bootstrap5/bootstrap5.html" %}
+{% load django_bootstrap5 static %}
+
+{% block bootstrap5_title %}Controle de Gastos{% endblock bootstrap5_title %}
+
+{% block bootstrap5_extra_head %}
+<script src="{% static 'common/js/toogle_theme.js' %}"></script>
+{% endblock %}
+
+{% block bootstrap5_before_content %}
+{% bootstrap_messages %}
+{% endblock %}
+
+{% block bootstrap5_content %}
+<div class="container mt-5">
+    <div class="col justify-content-center">
+        {% block navbar %}
+        {% include 'base/widgets/navbar.html' with user=user %}
+        {% endblock navbar %}
+
+        {% block content %}Página vazia{% endblock content %}
+    </div>
+</div>
+{% endblock %}
+
+{% block bootstrap5_after_content %}
+{% endblock %}
