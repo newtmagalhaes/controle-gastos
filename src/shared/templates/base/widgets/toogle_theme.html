@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<div class="dropdown">
+    <button class="btn btn-link nav-link px-0 px-lg-2 py-2 dropdown-toggle d-flex align-items-center show" id="bd-theme" type="button" aria-expanded="true" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme">
+        <i class="bi bi-circle-half" id="bd-active-theme" ></i>
+        <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
+    </button>
+
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text" data-bs-popper="static">
+        {% for theme, label, icon_class in BOOTSTRAP_THEMES %}
+        <li>
+            <button type="button" class="dropdown-item d-flex align-text-center gap-2" data-bs-theme-value="{{ theme }}">
+                <i class="bi bi-{{ icon_class }}" ></i>
+                {% translate label %}
+            </button>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
