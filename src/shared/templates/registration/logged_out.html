@@ -1,0 +1,11 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="col mb-3">
+    <span class="card p-1 border-danger bg-danger-subtle text-danger mb-3" >
+        Você foi deslogado.
+    </span>
+    <hr>
+    <a href="{% url "home" %}" class="card p-1 border-info bg-info-subtle text-info mb-3">Voltar para home</a>
+</div>
+{% endblock content %}

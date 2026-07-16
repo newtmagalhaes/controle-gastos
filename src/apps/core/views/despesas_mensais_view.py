@@ -10,7 +10,7 @@ class DespesasMensaisView(MonthArchiveView):
     date_field = 'date'
     month_format = '%m'
     allow_empty = True
-    paginate_by = settings.DEFAULT_PAGE_SIZE
+    # paginate_by = settings.DEFAULT_PAGE_SIZE
     template_name = 'core/archive/despesas_mensais.html'
 
     def get_queryset(self):

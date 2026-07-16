@@ -1,0 +1,28 @@
+{% if user.is_anonymous %}
+<a href="{% url "login" %}" class="btn btn-outline-success">
+    <i class="bi bi-door-open"></i>
+    <span>Login</span>
+</a>
+{% else %}
+<div class="dropdown">
+    <button class="btn btn-link nav-link px-0 px-lg-2 py-2 dropdown-toggle d-flex align-items-center show" type="button" data-bs-toggle="dropdown">
+        <i class="bi bi-person"></i>
+        <span class="ms-2" id="bd-theme-text">{{ user.username }}</span>
+    </button>
+
+    <ul class="dropdown-menu" data-bs-popper="static">
+        <li>
+            <form class="card pl-2" action="{% url "logout" %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger" >
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Logout</span>
+                </button>
+            </form>
+        </li>
+    </ul>
+</div>
+{% endif %}
+
+
+

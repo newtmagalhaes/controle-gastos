@@ -9,7 +9,6 @@ class CategoriasListView(ListView):
     model = CategoriaDespesa
     ordering = ['titulo']
     allow_empty = True
-    paginate_by = settings.DEFAULT_PAGE_SIZE
     template_name = 'core/archive/categorias_list.html'
 
     def get_queryset(self):

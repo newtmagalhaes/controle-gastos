@@ -1,11 +1,19 @@
 <nav class="navbar navbar-expand bg-body-tertiary mb-3">
     <div class="container-fluid">
-        <div class="colapse navbar-collapse">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    {% include "base/widgets/toogle_theme.html" %}
-                </li>
-            </ul>
-        </div>
+        <a class="navbar-brand" href="#">Despesas</a>
+    </div>
+    <div class="colapse navbar-collapse me-2">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                {% include "base/widgets/toogle_theme.html" %}
+            </li>
+        </ul>
+    </div>
+    <div class="colapse navbar-collapse me-2">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                {% include "base/widgets/user_options.html" with user=user %}
+            </li>
+        </ul>
     </div>
 </nav>

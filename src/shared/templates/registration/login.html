@@ -1,8 +1,1 @@
-{% extends "base/base.html" %}
-{% load django_bootstrap5 i18n %}
-
-{% block content %}
-<div class="card mx-auto border-info" style="width: 480px;">
-    {% include "base/widgets/forms.html" with form=form submit_button_content="{% translate 'Log in' %}" %}
-</div>
-{% endblock content %}
+{% extends "base/pages/form_view.html" %}

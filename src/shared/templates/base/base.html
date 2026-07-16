@@ -6,10 +6,7 @@
 {% block bootstrap5_extra_head %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 <script src="{% static 'common/js/toogle_theme.js' %}"></script>
-{% endblock %}
-
-{% block bootstrap5_before_content %}
-{% bootstrap_messages %}
+<script src="https://cdn.canvasjs.com/ga/canvasjs.min.js"></script>
 {% endblock %}
 
 {% block bootstrap5_content %}
@@ -18,6 +15,10 @@
         {% block navbar %}
         {% include 'base/widgets/navbar.html' with user=user %}
         {% endblock navbar %}
+
+        {% block messages %}
+        {% bootstrap_messages %}
+        {% endblock messages %}
 
         {% block content %}Página vazia{% endblock content %}
     </div>
