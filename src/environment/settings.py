@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     # Libs
     'django_bootstrap5',
     # Apps
+    'apps.django_chartjs',
     'apps.manager',
     'apps.core',
 ]
