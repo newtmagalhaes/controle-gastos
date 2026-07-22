@@ -10,7 +10,7 @@
 {% block page_body_columns %}
 {% for categoria in object_list %}
 <tr>
-    <td>{{ categoria.titulo }}</td>
+    <td>{{ categoria.title }}</td>
     <td class="text-end">{{ categoria.total|floatformat:"-2" }}</td>
 </tr>
 

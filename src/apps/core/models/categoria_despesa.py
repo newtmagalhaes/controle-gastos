@@ -3,13 +3,19 @@ from django.db import models
 
 
 class CategoriaDespesa(models.Model):
-    titulo = models.CharField(
-        verbose_name='título', name='titulo', max_length=75,
+    title = models.CharField(
+        verbose_name='título', max_length=75,
         blank=False, null=False,
     )
-    descricao = models.CharField(
-        verbose_name='descrição', name='description', max_length=75,
+    description = models.CharField(
+        verbose_name='descrição', max_length=75,
         blank=False, null=False,
+    )
+
+    created_at = models.DateTimeField(
+        verbose_name='criado em', name='created_at',
+        auto_now_add=True, null=False, blank=False,
+        db_index=True,
     )
 
     user = models.ForeignKey(
@@ -21,6 +27,7 @@ class CategoriaDespesa(models.Model):
     class Meta:
         verbose_name = 'categoria de despesa'
         verbose_name_plural = 'categorias de despesas'
+        ordering = ['title']
 
     def __str__(self) -> str:
-        return f'Categoria[{self.pk}]({self.titulo})'
+        return f'Categoria[{self.pk}]({self.title})'
