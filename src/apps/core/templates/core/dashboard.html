@@ -1,0 +1,26 @@
+{% extends "core/base_chart.html" %}
+{% load django_chartjs core %}
+
+{% block content %}
+<div class="row">{{available_dates}}</div>
+{% if object_list|length > 0 %}
+<div class="row">
+    <div class="col" style="height: 360px;">
+        {% chart pie_chart %}
+    </div>
+    <div class="col" style="height: 360px;">
+        {% chart line_chart %}
+    </div>
+</div>
+
+
+<div class="row">
+    {% include "core/widgets/dashboard/table.html" with object_list=object_list %}
+</div>
+
+{% else %}
+<div class="alert alert-primary">
+    Sem despesas em {{ selected_date | date:"F/Y" }}
+</div>
+{% endif %}
+{% endblock content %}

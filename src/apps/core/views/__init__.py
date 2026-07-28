@@ -6,6 +6,7 @@ from django.views.generic import RedirectView
 
 # Register your views here
 from .categorias_view import CategoriasListView
+from .dashboard_view import DashboardView
 from .despesas_mensais_view import DespesasMensaisView
 
 

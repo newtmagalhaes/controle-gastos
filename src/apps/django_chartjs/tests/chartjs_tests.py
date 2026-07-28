@@ -15,13 +15,15 @@ from apps.django_chartjs import chartjs, utils
 def test_render_pie_data_point(raw: dict):
     c = chartjs.ChartjsPie('test_id', [raw])
 
-    template = Template('datasets: {{ dp | safe }},')
-    rendered = template.render(Context({'dp': c.datasets()}))
+    template = Template('labels: {{ lb | safe }}, datasets: {{ dp | safe }}')
+    rendered = template.render(Context({'dp': c.datasets(), 'lb': c.labels()}))
 
     expect_label = utils._get_label_from_dict(raw)
-    result = {'labels': [expect_label], 'data': [raw['y']]}
+    result = {'data': [raw['y']]}
 
-    assert rendered == f"datasets: [{result}],"
+    assert c.labels()
+    assert c.datasets()
+    assert rendered == f"labels: ['{expect_label}'], datasets: [{result}]"
 
 
 def test_create_empty_pie_error():
