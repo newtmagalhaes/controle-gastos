@@ -3,9 +3,14 @@ from datetime import datetime
 from django.contrib import admin
 from django.utils import timezone
 
-from ...core import models
+from apps.core import models
 
 # Register your models here.
+
+
+class ItemDespesaInline(admin.TabularInline):
+    model = models.ItemDespesa
+    extra = 1
 
 
 @admin.register(models.CategoriaDespesa)
@@ -13,6 +18,7 @@ class CategoriaDespesaAdmin(admin.ModelAdmin):
     list_display = ('title', 'category_owner', 'id',)
     list_display_links = ('title', 'id',)
     list_select_related = ('user',)
+    inlines = [ItemDespesaInline]
 
     @admin.display(description='dono')
     def category_owner(self, obj: models.CategoriaDespesa):
