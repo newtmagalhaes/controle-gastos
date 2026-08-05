@@ -1,8 +1,8 @@
 from datetime import date
 
 from django.db import models
-from django.db.models.manager import Manager
 from django.db.models.functions import Cast, TruncMonth
+from django.db.models.manager import Manager
 from django.utils import timezone
 from django.views.generic import ListView
 
@@ -31,11 +31,37 @@ def _create_pie_chart(qs: Manager[CategoriaDespesa], id: str = 'dashboard_pie_id
     return chartjs.ChartjsPie(id, pie_data)
 
 
-class DashboardView(ListView):
+class PeriodFromParamsMixin:
+    period_field = 'periodo'
+
+    def get_context_data(self, **kwargs) -> dict:
+        context = super().get_context_data(**kwargs)  # type: ignore
+        context["period_field"] = self.get_period_field()
+        return context
+
+    def get_period_field(self) -> str:
+        return self.period_field
+
+    def get_date(self) -> date | None:
+        '''return date if period is in params'''
+        value = self.request.GET.get(self.get_period_field())  # type: ignore
+        try:
+            assert isinstance(value, str)
+            year, month = map(int, value.split('-', maxsplit=1))
+            return date(year, month, 1)
+
+        except Exception:
+            return
+
+
+class DashboardView(PeriodFromParamsMixin, ListView):
+    '''Exibe `CategoriaDespesa`s e `ItensDespesa`s do usuário
+    do `ano-mês` atual ou especificado
+    '''
     template_name = 'core/dashboard.html'
 
     def get_date(self) -> date:
-        return timezone.now().date()
+        return super().get_date() or timezone.now().date().replace(day=1)
 
     def get_available_dates(self) -> list[str]:
         return list(
@@ -45,11 +71,11 @@ class DashboardView(ListView):
         )
 
     def get_queryset(self):
-        d = self.get_date()
+        selected_date = self.get_date()
         return categoria_despesas.list_non_empty_categorias_from_date(
             self.request.user.despesas,
-            d.month,
-            d.year,
+            selected_date.month,
+            selected_date.year,
         )
 
     def get_context_data(self, **kwargs):
