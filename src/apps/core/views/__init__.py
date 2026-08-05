@@ -5,9 +5,10 @@ from django.utils import timezone
 from django.views.generic import RedirectView
 
 # Register your views here
-from .categorias_view import CategoriasListView
+from .categorias_view import *
 from .dashboard_view import DashboardView
 from .despesas_mensais_view import DespesasMensaisView
+from .item_despesa_view import *
 
 
 class MesAtualRedirectView(RedirectView):

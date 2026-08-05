@@ -1,0 +1,36 @@
+{% load django_bootstrap5 %}
+{% comment %} 
+Expects `form`: `apps.core.forms.categoria_despesa.ItemDespesaModelForm`
+{% endcomment %}
+
+<div class="card border-secondary mb-3 p-2">
+    <div class="card-body">
+        {% bootstrap_field form.id %}
+        <div class="row mb-2">
+            {% bootstrap_field form.value wrapper_class='col-3' show_label=False addon_before='R$' %}
+            <span class="col-1">em</span>
+            <div class="col">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-calendar"></i>
+                    </span>
+                    {% bootstrap_field form.date wrapper_class='col-4' show_label=False show_help=False %}
+                    
+                    <span class="input-group-text">-</span>
+                    
+                    {% bootstrap_field form.time wrapper_class='col-4' show_label=False show_help=False %}
+                    <span class="input-group-text">
+                        <i class="bi bi-clock"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% bootstrap_field form.description layout='inline' field_class='mb-2' %}
+        {% bootstrap_field form.DELETE wrapper_class='row text-danger border-danger form-check-reverse mt-2' %}
+        {% comment %} <div class="d-flex flex-row-reverse">
+            <button type="submit" class="btn btn-danger" formaction="{% url "item_despesa_delete" pk=form.instance.id %}">
+                <i class="bi bi-trash"></i>
+            </button>
+        </div> {% endcomment %}
+    </div>
+</div>

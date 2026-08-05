@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<form class="d-grid gap-1 p-2" method="POST">
+    {% comment %} {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field.errors }}
+    {{ hidden_field }}
+    {% endfor %} {% endcomment %}
+
+    {% csrf_token %}
+
+    {% comment %} {% bootstrap_formset form %} {% endcomment %}
+
+    {{ form.management_form }}
+    {% for f in form %}
+        {% include "core/widgets/despesas/item_despesa_form.html" with form=f %}
+    {% endfor %}
+    
+    {% bootstrap_button button_type="submit" content="Confirmar" extra_classes="mb-3" %}
+</form>
+{% endblock content %}

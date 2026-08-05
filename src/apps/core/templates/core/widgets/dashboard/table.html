@@ -18,8 +18,14 @@ Requer que itens de `object_list` possuam campos `itens_despesas_sum` (float)
         {% for categoria in object_list %}
         <tr>
             <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ categoria.title|title }}</td>
+            <td><a href="{% url "categoria_detail" categoria.id %}">{{ categoria.title|title }}</a></td>
             <td>
+                {% if 1 == categoria.itens_despesas.all|length %}
+                {% with item=categoria.itens_despesas.all.0 %}
+                {{ item.value|to_brl }} em {{ item.date|date:"d/m/Y" }} {% if item.time %} às {{ item.time|time:"H:i" }} {% endif %}
+                {% endwith %}
+
+                {% else %}
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
                         {{ categoria.itens_despesas_sum|to_brl }}
@@ -35,6 +41,7 @@ Requer que itens de `object_list` possuam campos `itens_despesas_sum` (float)
                         </ul>
                     </div>
                 </div>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

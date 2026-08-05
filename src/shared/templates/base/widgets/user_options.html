@@ -10,7 +10,17 @@
         <span class="ms-2" id="bd-theme-text">{{ user.username }}</span>
     </button>
 
-    <ul class="dropdown-menu" data-bs-popper="static">
+    <ul class="dropdown-menu p-1 row-gap-1" data-bs-popper="static">
+        {% block dropdown_menu_extra %}
+        <li><a href="{% url "categorias_list" %}" class="dropdown-item">Categorias</a></li>
+
+        {% if user.is_staff %}
+        <li><hr class="dropdown-divider"></li>
+        <li><a href="{% url "admin:index" %}" class="dropdown-item">Admin</a></li>
+        {% endif %}
+        {% endblock dropdown_menu_extra %}
+
+        <li><hr class="dropdown-divider"></li>
         <li>
             <form class="card pl-2" action="{% url "logout" %}" method="post">
                 {% csrf_token %}
