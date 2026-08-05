@@ -1,0 +1,20 @@
+{% extends "core/base_chart.html" %}
+{% load django_bootstrap5 django_chartjs core %}
+
+{% block content %}
+<form class="d-grid gap-1 p-2" method="POST">
+    {% csrf_token %}
+    <div class="row mb-3">
+        <div class="col">
+            {% chart line_chart %}
+        </div>
+        <div class="col">
+            {% bootstrap_form form %}
+        </div>
+    </div>
+
+    {% accordion accordion_items %}
+
+    {% bootstrap_button button_type="submit" content="Confirmar" extra_classes="mb-3" %}
+</form>
+{% endblock content %}
