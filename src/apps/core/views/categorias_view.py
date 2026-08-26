@@ -82,15 +82,6 @@ class CategoriaBulkUpdateView(UpdateView):
         messages.success(self.request, f'Categoria {categoria.title}')
         return reverse('categorias_list')
 
-    def form_invalid(self, form):
-        print(form.errors)
-        # a = categoria_forms.ItemDespesaBulkUpdateFormset()
-        # for title, err in a.errors:
-        #     messages.error(self.request, f'{title}: {err}')
-        response = super().form_invalid(form)
-        return response
-
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-
         return context

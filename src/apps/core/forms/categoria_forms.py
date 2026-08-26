@@ -13,6 +13,10 @@ class ItemDespesaModelForm(forms.ModelForm):
     class Meta:
         model = ItemDespesa
         fields = ['value', 'description', 'date', 'time']
+        widgets = {
+            'date': forms.widgets.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+            'time': forms.widgets.TimeInput(attrs={'type': 'time'}),
+        }
 
     def save(self, commit: bool = True):
         '''Set instance user before save'''
@@ -24,6 +28,5 @@ ItemDespesaBulkUpdateFormset = forms.inlineformset_factory(
     CategoriaDespesa,
     ItemDespesa,
     form=ItemDespesaModelForm,
-    # edit_only=True,
-    extra=1
+    extra=0,
 )

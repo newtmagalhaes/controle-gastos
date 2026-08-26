@@ -10,7 +10,7 @@ def list_non_empty_categorias_from_date(
         ) -> models.Manager[CategoriaDespesa]:
     '''List `CategoriaDespesa` with `ItemDespesa` from month/year'''
     users = set(qs.values_list('user_id', flat=True))
-    related_itens = ItemDespesa.objects.filter(user_id__in=users, date__month=month, date__year=year)
+    related_itens = ItemDespesa.objects.filter(user_id__in=users, date__month=month, date__year=year).order_by('-date')
     itens_despesas_sum_field = models.Sum(
         'itens_despesas__value',
         default=0,

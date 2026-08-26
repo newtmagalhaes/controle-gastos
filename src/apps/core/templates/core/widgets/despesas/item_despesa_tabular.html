@@ -1,0 +1,36 @@
+{% load django_bootstrap5 %}
+{% comment %} 
+Expects `form`: `apps.core.forms.categoria_forms.ItemDespesaBulkUpdateFormset`
+{% endcomment %}
+
+{{ formset.management_form }}
+
+{% if formset.errors %}
+{% bootstrap_formset_errors formset %}
+{% endif %}
+
+<table class="table ">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+
+            {% for field in formset.form.fields.values %}
+            <th scope="col" {% if field.help_text %} title="{{ field.help_text }}" {% endif %}>{{ field.label }}</th>
+            {% endfor %}
+
+            {% if formset.can_delete %}
+            <th class="text-danger"> Apagar? </th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for form in formset %}
+        <tr>
+            <th scope="row">{{ form.instance.pk|truncatechars:"10" }}</th>
+            {% for field in form.visible_fields %}
+            <td>{% bootstrap_field field layout='inline' show_help=False show_label=False %}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
