@@ -4,7 +4,7 @@ from . import views
 
 _categorias = [
     path('', views.CategoriasListView.as_view(), name='categorias_list'),
-    path('<uuid:slug>/', views.CategoriasUpdateView.as_view(), name='categoria_update'),
+    path('<uuid:slug>/', views.CategoriaDetailView.as_view(), name='categoria_detail'),
     path('<uuid:pk>/despesas/', views.CategoriaBulkUpdateView.as_view(), name='item_despesa_update'),
     path('<uuid:slug>/edit/', views.CategoriasUpdateView.as_view(), name='categoria_update'),
 ]
