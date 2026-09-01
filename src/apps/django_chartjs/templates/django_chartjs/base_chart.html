@@ -1,0 +1,20 @@
+<div class="container" style="height: 300px;">
+    <canvas id="{{ chart.id }}"></canvas>
+    <script>
+        new Chart(
+            document.getElementById('{{ chart.id }}'),
+            {% autoescape off %}
+            {
+                type: '{{ chart.type }}',
+                data: {
+                    datasets: {{ chart.datasets }},
+                    {% if chart.labels %}
+                    labels: {{ chart.labels }}
+                    {% endif %}
+                },
+                options: {{ chart.options }}
+            },
+            {% endautoescape %}
+        )
+    </script>
+</div>
