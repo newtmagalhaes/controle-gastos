@@ -5,7 +5,7 @@ from typing import Any, Literal
 from . import utils
 from .constants import ChartThemeChoices, ChartTypeChoices
 
-Dataset = dict[Literal['data']| str, Any]
+Dataset = dict[Literal['data'] | str, Any]
 
 
 @dataclass
@@ -30,11 +30,6 @@ class ChartType:
 
 
 class ChartjsPie(ChartType):
-    _DEFAULT_PIE_PARSING_OPTIONS = {
-        'parsing': {
-            'xAxisKey': 'label'
-        }
-    }
 
     def __init__(
             self,
@@ -53,12 +48,10 @@ class ChartjsPie(ChartType):
         assert data or (labels and values), "'data' or 'labels' and 'values' cannot be empty"
 
         dataset = [{
-            'labels': labels or list(map(utils._get_label_from_dict, data)),
             'data': values or list(map(utils._get_y_from_dict, data))
         }]
         super().__init__(id, dataset, ChartTypeChoices.PIE)
-        self._options = self._DEFAULT_PIE_PARSING_OPTIONS
-        self._labels = labels
+        self._labels = labels or list(map(utils._get_label_from_dict, data))
 
 
 class ChartjsLine(ChartType):

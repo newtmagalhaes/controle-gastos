@@ -1,0 +1,42 @@
+{% load core %}
+
+{% comment %} 
+Requer `object_list` (Manager[CategoriaDespesa])
+Requer que itens de `object_list` possuam campos `itens_despesas_sum` (float)
+{% endcomment %}
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome da Categoria</th>
+            <th scope="col">Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for categoria in object_list %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ categoria.title|title }}</td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ categoria.itens_despesas_sum|to_brl }}
+                        <i class="bi bi-info-circle text-info ms-1" ></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <ul class="list-group list-group-flush">
+                            {% for item in categoria.itens_despesas.all %}
+                            <li class="list-group-item">
+                                {{ item.value|to_brl }} em {{ item.date|date:"d/m/Y" }} {% if item.time %} às {{ item.time|time:"H:i" }} {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

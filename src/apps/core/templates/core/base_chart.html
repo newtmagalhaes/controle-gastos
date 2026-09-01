@@ -1,0 +1,7 @@
+{% extends "base/base.html" %}
+{% load django_chartjs %}
+
+{% block bootstrap5_extra_head %}
+{{ block.super }}
+{% chart_js %}
+{% endblock bootstrap5_extra_head %}

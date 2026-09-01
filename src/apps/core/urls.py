@@ -1,9 +1,18 @@
-from django.urls import path
+from django.urls import include, path
 
 from . import views
 
-urlpatterns = [
+_categorias = [
+    path('', views.CategoriasListView.as_view(), name='categorias_list'),
+]
+
+_despesas = [
     path('', views.MesAtualRedirectView.as_view(), name='home'),
     path('<int:year>/<int:month>/', views.DespesasMensaisView.as_view(), name='despesas_mensais'),
-    path('categorias/', views.CategoriasListView.as_view(), name='categorias_list'),
+]
+
+urlpatterns = [
+    path('', views.DashboardView.as_view(), name='dashboard'),
+    path('despesas/', include(_despesas)),
+    path('categorias/', include(_categorias)),
 ]

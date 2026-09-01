@@ -6,7 +6,6 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 """
 from django.contrib import admin
 from django.urls import include, path
-from django.views.generic import RedirectView
 
 urlpatterns = [
     # Base
@@ -14,6 +13,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     # Libs
     # Apps
-    path('gastos/', include('apps.core.urls')),
-    path('', RedirectView.as_view(url='gastos')),
+    path('', include('apps.core.urls')),
 ]

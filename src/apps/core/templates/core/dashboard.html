@@ -1,0 +1,37 @@
+{% extends "core/base_chart.html" %}
+{% load django_chartjs core %}
+
+{% block content %}
+<div class="row mb-2">
+    <div class="btn-group" role="group" aria-label="Mês selecionado">
+        {% with active_button='class="btn btn-primary active" aria-current="page"' inactive_button='class="btn btn-outline-primary"' %}
+        {% for date in available_dates %}
+        <a {% if date.month == selected_date %}{{ active_button }}{% else %}{{inactive_button}}{% endif %} href="?{{ period_field }}={{ date.month|date:"Y-m" }}">
+            {{ date.month|date:"m/Y" }}
+            <span class="badge rounded-pill text-bg-secondary">{{ date.count }}</span>
+        </a>
+        {% endfor %}
+        {% endwith %}
+    </div>
+</div>
+
+{% if object_list|length > 0 %}
+<div class="row mb-2">
+    <div class="col" style="height: 360px;">
+        {% chart pie_chart %}
+    </div>
+    <div class="col" style="height: 360px;">
+        {% chart line_chart %}
+    </div>
+</div>
+
+<div class="row mb-2">
+    {% include "core/widgets/dashboard/table.html" with object_list=object_list %}
+</div>
+
+{% else %}
+<div class="alert alert-primary mt-2">
+    Sem despesas em {{ selected_date | date:"F/Y" | default:"registros"}}
+</div>
+{% endif %}
+{% endblock content %}
