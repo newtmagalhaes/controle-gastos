@@ -13,6 +13,11 @@ def endpoint() -> str:
     return reverse('categorias_list')
 
 
+@fixture(scope='module')
+def categoria_detail() -> callable:
+    return lambda pk: reverse('categoria_detail', kwargs={'pk': pk})
+
+
 @fixture
 def multiple_users(db):
     '''Create multiple users (yields first) and one related `CategoriaDespesa` for each'''
@@ -20,13 +25,18 @@ def multiple_users(db):
         CustomUser(username=f'user {i}')
         for i in range(3)
     )
-    models.CategoriaDespesa.objects.bulk_create(
-        models.CategoriaDespesa(title=f'cat {i}', user=user)
-        for i, user in enumerate(users)
-    )
-    yield users[0]
+    yield users
     # Delete users and categories after test
     CustomUser.objects.filter(username__in=(u.username for u in users)).delete()
+
+
+@fixture
+def multiple_categorias(multiple_users: list[CustomUser]):
+    models.CategoriaDespesa.objects.bulk_create(
+        models.CategoriaDespesa(title=f'cat {i}', user=user)
+        for i, user in enumerate(multiple_users)
+    )
+    # yield
 
 
 def test_listar_categorias(admin_client: Client, db, endpoint):
@@ -35,11 +45,22 @@ def test_listar_categorias(admin_client: Client, db, endpoint):
     assert response.status_code == HTTPStatus.OK
 
 
-def test_list_own_categories(client: Client, multiple_users, endpoint):
-    client.force_login(multiple_users)
+def test_list_own_categories(client: Client, multiple_users, multiple_categorias, endpoint):
+    client.force_login(multiple_users[0])
 
     response = client.get(endpoint)
 
     assert response.status_code == HTTPStatus.OK
     assert (categorias := response.context.get('object_list')) is not None
     assert len(categorias) == 1
+
+
+def test_show_categoria(client: Client, multiple_users, multiple_categorias, categoria_detail):
+    user = multiple_users[0]
+    categoria = user.despesas.first()
+    assert isinstance(categoria, models.CategoriaDespesa)
+
+    client.force_login(user)
+    response = client.get(categoria_detail(categoria.id))
+
+    assert response.status_code == HTTPStatus.OK
