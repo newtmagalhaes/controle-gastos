@@ -1,11 +1,9 @@
 from typing import Any
 
-from django import forms
-from django.contrib import messages
 from django.db import models
 from django.db.models import Sum
 from django.db.models.functions import Cast
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponse
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, UpdateView
 
@@ -13,6 +11,7 @@ from apps.django_chartjs import chartjs
 
 from ..forms import categoria_forms
 from ..models import CategoriaDespesa
+from ..utils.views_mixin import ExtraFormsetMixin, ProcessExtraFormsetMixin
 
 __all__ = (
     'CategoriasListView',
@@ -57,7 +56,7 @@ class CategoriaDetailView(DetailView):
         return context
 
 
-class CategoriasUpdateView(UpdateView):
+class CategoriasUpdateView(ExtraFormsetMixin, ProcessExtraFormsetMixin, UpdateView):
     template_name = 'core/categorias/form.html'
     form_class = categoria_forms.UpdateCategoriaDespesaForm
     formset_class = categoria_forms.ItemDespesaBulkUpdateFormset
@@ -68,41 +67,13 @@ class CategoriasUpdateView(UpdateView):
     def get_success_url(self) -> str:
         return reverse('categorias_list')
 
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        # Chamada do pai já inclui form
-        if 'formset' not in context:
-            context['formset'] = self._get_formset()
-        return context
-
-    def _get_formset(self):
-        formset_class = self.formset_class
-        return formset_class(**self.get_form_kwargs())
-
-    def _form_valid(self, form: forms.BaseModelForm, formset: forms.BaseModelFormSet) -> HttpResponse:
-        if form.has_changed():
-            self.object = form.save()
-            messages.info(self.request, f'Categoria "{self.object.title}" alterada')
-
-        if formset.has_changed():
-            deleted_items = len(formset.deleted_forms)
-            total_items = len(formset.save())
-            created_items = len(formset.new_objects)
-            msg = f"{created_items} criados. {total_items - created_items} alterados. {deleted_items} apagados."
-            messages.info(self.request, msg)
-
-        return HttpResponseRedirect(self.get_success_url())
-
-    def _formset_invalid(self, formset):
-        return self.render_to_response(self.get_context_data(formset=formset))
-
     def post(self, request, *args, **kwargs) -> HttpResponse:
         self.object = self.get_object()
-
         form = self.get_form()
-        formset = self._get_formset()
+        formset = self.get_formset()
+
         if form.is_valid():
             if formset.is_valid():
-                return self._form_valid(form, formset)
-            return self._formset_invalid(formset)
+                return self.both_forms_valid(form, formset)
+            return self.formset_invalid(formset)
         return self.form_invalid(form)
