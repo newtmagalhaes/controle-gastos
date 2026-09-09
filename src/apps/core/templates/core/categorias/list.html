@@ -20,11 +20,8 @@
     <td class="text-end">{{ categoria.total|to_brl }}</td>
     <td>
         <div class="btn-group">
-            <a href="{% url "categoria_update" slug=categoria.id %}" class="btn btn-info">
+            <a href="{% url "categoria_update" pk=categoria.id %}" class="btn btn-info">
                 <i class="bi bi-pencil-square"></i>
-            </a>
-            <a href="{% url "item_despesa_update" pk=categoria.id %}" class="btn btn-success">
-                <i class="bi bi-clipboard-plus"></i>
             </a>
         </div>
     </td>

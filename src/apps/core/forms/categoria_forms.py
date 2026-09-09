@@ -28,5 +28,7 @@ ItemDespesaBulkUpdateFormset = forms.inlineformset_factory(
     CategoriaDespesa,
     ItemDespesa,
     form=ItemDespesaModelForm,
-    extra=0,
+    extra=1,
 )
+
+ItemDespesaBulkUpdateFormset.template_name = 'core/widgets/despesas/item_despesa_tabular.html'

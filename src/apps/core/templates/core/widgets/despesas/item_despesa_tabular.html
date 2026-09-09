@@ -26,7 +26,7 @@ Expects `form`: `apps.core.forms.categoria_forms.ItemDespesaBulkUpdateFormset`
     <tbody>
         {% for form in formset %}
         <tr>
-            <th scope="row">{{ form.instance.pk|truncatechars:"10" }}</th>
+            <th scope="row">{{ form.instance.pk|truncatechars:"10" }} {% for f in form.hidden_fields %}{{ f }}{% endfor %}</th>
             {% for field in form.visible_fields %}
             <td>{% bootstrap_field field layout='inline' show_help=False show_label=False %}</td>
             {% endfor %}

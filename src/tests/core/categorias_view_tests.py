@@ -13,9 +13,12 @@ def endpoint() -> str:
     return reverse('categorias_list')
 
 
-@fixture(scope='module')
-def categoria_detail() -> callable:
-    return lambda pk: reverse('categoria_detail', kwargs={'pk': pk})
+def _categoria_detail(pk):
+    return reverse('categoria_detail', kwargs={'pk': pk})
+
+
+def _categoria_update(pk):
+    return reverse('categoria_update', kwargs={'pk': pk})
 
 
 @fixture
@@ -55,12 +58,23 @@ def test_list_own_categories(client: Client, multiple_users, multiple_categorias
     assert len(categorias) == 1
 
 
-def test_show_categoria(client: Client, multiple_users, multiple_categorias, categoria_detail):
+def test_show_categoria(client: Client, multiple_users, multiple_categorias):
     user = multiple_users[0]
     categoria = user.despesas.first()
     assert isinstance(categoria, models.CategoriaDespesa)
 
     client.force_login(user)
-    response = client.get(categoria_detail(categoria.id))
+    response = client.get(_categoria_detail(categoria.id))
+
+    assert response.status_code == HTTPStatus.OK
+
+
+def test_show_categoria_update(client: Client, multiple_users, multiple_categorias):
+    user = multiple_users[0]
+    categoria = user.despesas.first()
+    assert isinstance(categoria, models.CategoriaDespesa)
+
+    client.force_login(user)
+    response = client.get(_categoria_update(categoria.id))
 
     assert response.status_code == HTTPStatus.OK
