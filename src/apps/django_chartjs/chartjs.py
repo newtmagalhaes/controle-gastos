@@ -28,6 +28,18 @@ class ChartType:
     def options(self) -> dict:
         return getattr(self, '_options', {})
 
+    def data(self) -> dict[str, Any]:
+        chart_data = {
+            'type': self.type.value,
+            'data': {
+                'datasets': self.datasets(),
+            },
+            'options': self.options(),
+        }
+        if labels := self.labels():
+            chart_data['data'].setdefault('labels', labels)
+        return chart_data
+
 
 class ChartjsPie(ChartType):
 

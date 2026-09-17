@@ -1,6 +1,6 @@
 from django.template import Context, Template
-from pytest import mark
-import pytest
+from pytest import mark, raises
+
 from apps.django_chartjs import chartjs, utils
 
 
@@ -27,7 +27,7 @@ def test_render_pie_data_point(raw: dict):
 
 
 def test_create_empty_pie_error():
-    with pytest.raises(AssertionError):
+    with raises(AssertionError):
         chartjs.ChartjsPie('test_id')
 
 
