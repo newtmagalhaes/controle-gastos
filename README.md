@@ -24,17 +24,17 @@
 | apps/core/views/despesas\_mensais\_view.py           |       14 |        3 |        0 |        0 |     79% |     17-19 |
 | apps/django\_chartjs/\_\_init\_\_.py                 |        0 |        0 |        0 |        0 |    100% |           |
 | apps/django\_chartjs/apps.py                         |        4 |        0 |        0 |        0 |    100% |           |
-| apps/django\_chartjs/chartjs.py                      |       24 |        0 |        0 |        0 |    100% |           |
+| apps/django\_chartjs/chartjs.py                      |       29 |        0 |        2 |        0 |    100% |           |
 | apps/django\_chartjs/constants.py                    |        8 |        0 |        0 |        0 |    100% |           |
 | apps/django\_chartjs/templatetags/\_\_init\_\_.py    |        0 |        0 |        0 |        0 |    100% |           |
-| apps/django\_chartjs/templatetags/django\_chartjs.py |       10 |        0 |        0 |        0 |    100% |           |
+| apps/django\_chartjs/templatetags/django\_chartjs.py |        8 |        0 |        0 |        0 |    100% |           |
 | apps/django\_chartjs/utils.py                        |        6 |        0 |        0 |        0 |    100% |           |
 | apps/manager/\_\_init\_\_.py                         |        0 |        0 |        0 |        0 |    100% |           |
 | apps/manager/admin.py                                |        4 |        0 |        0 |        0 |    100% |           |
 | apps/manager/apps.py                                 |        5 |        0 |        0 |        0 |    100% |           |
 | apps/manager/fields.py                               |       13 |        1 |        0 |        0 |     92% |        18 |
 | apps/manager/models.py                               |        3 |        0 |        0 |        0 |    100% |           |
-| **TOTAL**                                            |  **327** |   **12** |   **16** |    **4** | **95%** |           |
+| **TOTAL**                                            |  **330** |   **12** |   **18** |    **4** | **95%** |           |
 
 
 ## Setup coverage badge
