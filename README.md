@@ -5,18 +5,21 @@
 | Name                                                 |    Stmts |     Miss |   Branch |   BrPart |   Cover |   Missing |
 |----------------------------------------------------- | -------: | -------: | -------: | -------: | ------: | --------: |
 | apps/core/\_\_init\_\_.py                            |        0 |        0 |        0 |        0 |    100% |           |
-| apps/core/admin/\_\_init\_\_.py                      |       23 |        3 |        0 |        0 |     87% |19, 30, 34 |
+| apps/core/admin/\_\_init\_\_.py                      |       27 |        3 |        0 |        0 |     89% |25, 36, 40 |
 | apps/core/apps.py                                    |        5 |        0 |        0 |        0 |    100% |           |
 | apps/core/filters/\_\_init\_\_.py                    |        0 |        0 |        0 |        0 |    100% |           |
 | apps/core/filters/categoria\_despesas.py             |        7 |        0 |        0 |        0 |    100% |           |
+| apps/core/forms/categoria\_forms.py                  |       16 |        0 |        0 |        0 |    100% |           |
 | apps/core/models/\_\_init\_\_.py                     |        2 |        0 |        0 |        0 |    100% |           |
 | apps/core/models/categoria\_despesa.py               |       13 |        1 |        0 |        0 |     92% |        33 |
 | apps/core/models/item\_despesa.py                    |       15 |        0 |        0 |        0 |    100% |           |
 | apps/core/templatetags/\_\_init\_\_.py               |        0 |        0 |        0 |        0 |    100% |           |
-| apps/core/templatetags/core.py                       |        6 |        0 |        0 |        0 |    100% |           |
+| apps/core/templatetags/core.py                       |       10 |        0 |        0 |        0 |    100% |           |
 | apps/core/urls.py                                    |        5 |        0 |        0 |        0 |    100% |           |
+| apps/core/utils/\_\_init\_\_.py                      |        0 |        0 |        0 |        0 |    100% |           |
+| apps/core/utils/views\_mixin.py                      |       30 |        0 |        6 |        2 |     94% |28-\>32, 32-\>39 |
 | apps/core/views/\_\_init\_\_.py                      |       13 |        4 |        0 |        0 |     69% |     15-18 |
-| apps/core/views/categorias\_view.py                  |       10 |        0 |        0 |        0 |    100% |           |
+| apps/core/views/categorias\_view.py                  |       44 |        0 |        8 |        2 |     96% |55-\>58, 58-\>60 |
 | apps/core/views/dashboard\_view.py                   |       49 |        0 |        2 |        0 |    100% |           |
 | apps/core/views/despesas\_mensais\_view.py           |       14 |        3 |        0 |        0 |     79% |     17-19 |
 | apps/django\_chartjs/\_\_init\_\_.py                 |        0 |        0 |        0 |        0 |    100% |           |
@@ -31,7 +34,7 @@
 | apps/manager/apps.py                                 |        5 |        0 |        0 |        0 |    100% |           |
 | apps/manager/fields.py                               |       13 |        1 |        0 |        0 |     92% |        18 |
 | apps/manager/models.py                               |        3 |        0 |        0 |        0 |    100% |           |
-| **TOTAL**                                            |  **239** |   **12** |    **2** |    **0** | **95%** |           |
+| **TOTAL**                                            |  **327** |   **12** |   **16** |    **4** | **95%** |           |
 
 
 ## Setup coverage badge

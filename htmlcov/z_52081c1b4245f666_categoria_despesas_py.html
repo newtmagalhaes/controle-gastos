@@ -64,10 +64,10 @@
         <p class="text">
             <a id="prevFileLink" class="nav" href="z_f23e86575cf2f261_apps_py.html">&#xab; prev</a> &nbsp; &nbsp;
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
-            <a id="nextFileLink" class="nav" href="z_13eddf828a156e3e___init___py.html">&#xbb; next</a>
+            <a id="nextFileLink" class="nav" href="z_368231defe68accf_categoria_forms_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.15.4">coverage.py v7.15.4</a>,
-            created at 2026-09-08 13:47 +0000
+            created at 2026-09-21 12:58 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -94,7 +94,7 @@
     <p class="run run2"><span class="n"><a id="t10" href="#t10">10</a></span><span class="t">        <span class="op">)</span> <span class="op">-&gt;</span> <span class="nam">models</span><span class="op">.</span><span class="nam">Manager</span><span class="op">[</span><span class="nam">CategoriaDespesa</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t11" href="#t11">11</a></span><span class="t">    <span class="str">&#x27;&#x27;&#x27;List `CategoriaDespesa` with `ItemDespesa` from month/year&#x27;&#x27;&#x27;</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t12" href="#t12">12</a></span><span class="t">    <span class="nam">users</span> <span class="op">=</span> <span class="nam">set</span><span class="op">(</span><span class="nam">qs</span><span class="op">.</span><span class="nam">values_list</span><span class="op">(</span><span class="str">&#x27;user_id&#x27;</span><span class="op">,</span> <span class="nam">flat</span><span class="op">=</span><span class="key">True</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t13" href="#t13">13</a></span><span class="t">    <span class="nam">related_itens</span> <span class="op">=</span> <span class="nam">ItemDespesa</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">filter</span><span class="op">(</span><span class="nam">user_id__in</span><span class="op">=</span><span class="nam">users</span><span class="op">,</span> <span class="nam">date__month</span><span class="op">=</span><span class="nam">month</span><span class="op">,</span> <span class="nam">date__year</span><span class="op">=</span><span class="nam">year</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t13" href="#t13">13</a></span><span class="t">    <span class="nam">related_itens</span> <span class="op">=</span> <span class="nam">ItemDespesa</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">filter</span><span class="op">(</span><span class="nam">user_id__in</span><span class="op">=</span><span class="nam">users</span><span class="op">,</span> <span class="nam">date__month</span><span class="op">=</span><span class="nam">month</span><span class="op">,</span> <span class="nam">date__year</span><span class="op">=</span><span class="nam">year</span><span class="op">)</span><span class="op">.</span><span class="nam">order_by</span><span class="op">(</span><span class="str">&#x27;-date&#x27;</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t14" href="#t14">14</a></span><span class="t">    <span class="nam">itens_despesas_sum_field</span> <span class="op">=</span> <span class="nam">models</span><span class="op">.</span><span class="nam">Sum</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t">        <span class="str">&#x27;itens_despesas__value&#x27;</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t16" href="#t16">16</a></span><span class="t">        <span class="nam">default</span><span class="op">=</span><span class="num">0</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
@@ -111,10 +111,10 @@
         <p>
             <a class="nav" href="z_f23e86575cf2f261_apps_py.html">&#xab; prev</a> &nbsp; &nbsp;
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
-            <a class="nav" href="z_13eddf828a156e3e___init___py.html">&#xbb; next</a>
+            <a class="nav" href="z_368231defe68accf_categoria_forms_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.15.4">coverage.py v7.15.4</a>,
-            created at 2026-09-08 13:47 +0000
+            created at 2026-09-21 12:58 +0000
         </p>
     </div>
 </footer>
