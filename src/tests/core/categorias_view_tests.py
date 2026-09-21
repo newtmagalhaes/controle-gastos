@@ -102,6 +102,60 @@ def test_save_categoria_update(logged_client: Client, current_user, multiple_cat
     assert response.url == endpoint
 
 
+def test_save_categoria_update_fail_form(logged_client: Client, current_user, multiple_categorias, endpoint):
+    categoria = current_user.despesas.first()
+    assert isinstance(categoria, models.CategoriaDespesa)
+
+    initial = logged_client.get(_categoria_update(categoria.id))
+    assert isinstance(initial, TemplateResponse)
+    assert initial.status_code == HTTPStatus.OK
+
+    body = _to_body(initial.context['form'])
+    # title can't be empty
+    body['title'] = ''
+
+    initial_formset = initial.context['formset']
+    body.update(_to_body(initial_formset.management_form))
+    body.update(*[_to_body(form) for form in initial_formset])
+
+    response = logged_client.post(_categoria_update(categoria.id), data=body)
+
+    assert response.status_code == HTTPStatus.OK
+    assert isinstance(response, TemplateResponse)
+
+    form = response.context['form']
+    assert form.is_valid() is False
+    assert 'title' in form.errors
+    assert response.context['formset'].is_valid() is True
+
+
+def test_save_categoria_update_fail_formset(logged_client: Client, current_user, multiple_categorias, endpoint):
+    categoria = current_user.despesas.first()
+    assert isinstance(categoria, models.CategoriaDespesa)
+
+    initial = logged_client.get(_categoria_update(categoria.id))
+    assert initial.status_code == HTTPStatus.OK
+    assert isinstance(initial, TemplateResponse)
+
+    body = _to_body(initial.context['form'])
+
+    initial_formset = initial.context['formset']
+    body.update(_to_body(initial_formset.management_form))
+    body.update(*[_to_body(form) for form in initial_formset])
+    # date is a required field
+    body[f'{initial_formset.prefix}-0-value'] = 42
+
+    response = logged_client.post(_categoria_update(categoria.id), data=body)
+
+    assert response.status_code == HTTPStatus.OK
+    assert isinstance(response, TemplateResponse)
+
+    formset = response.context['formset']
+    assert response.context['form'].is_valid()
+    assert response.context['formset'].is_valid() is False
+    assert any('date' in errors for errors in formset.errors)
+
+
 def _to_body(form: Form):
     return {
         field.id_for_label.removeprefix('id_'): field.value()
