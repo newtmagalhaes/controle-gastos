@@ -1,20 +1,15 @@
 <div class="container" style="height: 300px;">
     <canvas id="{{ chart.id }}"></canvas>
+
+    {% with data_id='data_'|add:chart.id %}
+
+    {{ chart.data|json_script:data_id}}
+
     <script>
         new Chart(
             document.getElementById('{{ chart.id }}'),
-            {% autoescape off %}
-            {
-                type: '{{ chart.type }}',
-                data: {
-                    datasets: {{ chart.datasets }},
-                    {% if chart.labels %}
-                    labels: {{ chart.labels }}
-                    {% endif %}
-                },
-                options: {{ chart.options }}
-            },
-            {% endautoescape %}
+            JSON.parse(document.getElementById('{{ data_id }}').textContent),
         )
     </script>
+    {% endwith %}
 </div>
