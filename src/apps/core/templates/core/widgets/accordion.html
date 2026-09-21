@@ -1,0 +1,16 @@
+<div class="accordion" id="{{ parent_id }}">
+    {% for item_id, item_name, item in items %}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button {{ forloop.first|yesno:',collapsed'}}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ item_id }}" {% if forloop.first %}aria-expanded="true"{% endif %} aria-controls="{{ item_id }}">
+                {{ item_name }}
+            </button>
+        </h2>
+        <div id="{{ item_id }}" class="accordion-collapse collapse {{ forloop.first|yesno:'show,' }}" data-bs-parent="#{{ parent_id }}">
+            <div class="accordion-body">
+                {{ item }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
