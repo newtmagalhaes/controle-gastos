@@ -88,4 +88,5 @@ class DashboardView(PeriodFromParamsMixin, ListView):
 
         context.setdefault('selected_date', self.get_date())
         context.setdefault('available_dates', self.get_available_dates())
+        context.setdefault('total_period', sum(q.itens_despesas_sum for q in queryset))
         return context

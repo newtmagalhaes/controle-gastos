@@ -46,4 +46,10 @@ Requer que itens de `object_list` possuam campos `itens_despesas_sum` (float)
         </tr>
         {% endfor %}
     </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="2" scope="row">Total acumulado:</th>
+            <td>{{ total_period|to_brl }}</td>
+        </tr>
+    </tfoot>
 </table>
